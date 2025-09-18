@@ -23,7 +23,7 @@
 <tr>
 <td>
 <div class="infoBox" id="tests">
-<div class="counter">2</div>
+<div class="counter">3</div>
 <p>tests</p>
 </div>
 </td>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">23.333s</div>
+<div class="counter">9.345s</div>
 <p>duration</p>
 </div>
 </td>
@@ -81,13 +81,18 @@
 </tr>
 </thead>
 <tr>
+<td class="success">Login with empty username</td>
+<td class="success">3.160s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
 <td class="success">Login with invalid credentials</td>
-<td class="success">3.653s</td>
+<td class="success">2.196s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">Login with valid credentials</td>
-<td class="success">19.680s</td>
+<td class="success">3.989s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -97,20 +102,28 @@
 <span class="code">
 <pre>
 @login @valid-login
-Scenario: Login with valid credentials     ?[90m# src/test/resources/login.feature:5?[0m
-  ?[32mGiven ?[0m?[32muser is on login page?[0m              ?[90m# com.example.steps.LoginSteps.userIsOnLoginPage()?[0m
-  ?[32mAnd ?[0m?[32muser input email ?[0m?[32m?[1m&quot;ardella@gmail.com&quot;?[0m ?[90m# com.example.steps.LoginSteps.userInputEmail(java.lang.String)?[0m
-  ?[32mAnd ?[0m?[32muser input password ?[0m?[32m?[1m&quot;Password&quot;?[0m       ?[90m# com.example.steps.LoginSteps.userInputPassword(java.lang.String)?[0m
-  ?[32mWhen ?[0m?[32muser click on Login button?[0m          ?[90m# com.example.steps.LoginSteps.userClickOnLoginButton()?[0m
-  ?[32mThen ?[0m?[32muser will redirect to homepage?[0m      ?[90m# com.example.steps.LoginSteps.userWillRedirectToHomepage()?[0m
+Scenario: Login with valid credentials   ?[90m# src/test/resources/login.feature:5?[0m
+  ?[32mGiven ?[0m?[32muser is on login page?[0m            ?[90m# com.example.steps.LoginSteps.userIsOnLoginPage()?[0m
+  ?[32mAnd ?[0m?[32muser input email ?[0m?[32m?[1m&quot;standard_user&quot;?[0m   ?[90m# com.example.steps.LoginSteps.userInputEmail(java.lang.String)?[0m
+  ?[32mAnd ?[0m?[32muser input password ?[0m?[32m?[1m&quot;secret_sauce&quot;?[0m ?[90m# com.example.steps.LoginSteps.userInputPassword(java.lang.String)?[0m
+  ?[32mWhen ?[0m?[32muser click on Login button?[0m        ?[90m# com.example.steps.LoginSteps.userClickOnLoginButton()?[0m
+  ?[32mThen ?[0m?[32muser will redirect to homepage?[0m    ?[90m# com.example.steps.HomeSteps.userWillRedirectToHomepage()?[0m
 
 @login @invalid-login
-Scenario: Login with invalid credentials   ?[90m# src/test/resources/login.feature:13?[0m
-  ?[32mGiven ?[0m?[32muser is on login page?[0m              ?[90m# com.example.steps.LoginSteps.userIsOnLoginPage()?[0m
-  ?[32mAnd ?[0m?[32muser input email ?[0m?[32m?[1m&quot;ardella@gmail.com&quot;?[0m ?[90m# com.example.steps.LoginSteps.userInputEmail(java.lang.String)?[0m
-  ?[32mAnd ?[0m?[32muser input password ?[0m?[32m?[1m&quot;WrongPassword&quot;?[0m  ?[90m# com.example.steps.LoginSteps.userInputPassword(java.lang.String)?[0m
-  ?[32mWhen ?[0m?[32muser click on Login button?[0m          ?[90m# com.example.steps.LoginSteps.userClickOnLoginButton()?[0m
-  ?[32mThen ?[0m?[32muser will see error message?[0m         ?[90m# com.example.steps.LoginSteps.userWillSeeErrorMessage()?[0m
+Scenario: Login with invalid credentials                                                                       ?[90m# src/test/resources/login.feature:13?[0m
+  ?[32mGiven ?[0m?[32muser is on login page?[0m                                                                                  ?[90m# com.example.steps.LoginSteps.userIsOnLoginPage()?[0m
+  ?[32mAnd ?[0m?[32muser input email ?[0m?[32m?[1m&quot;standard_user&quot;?[0m                                                                         ?[90m# com.example.steps.LoginSteps.userInputEmail(java.lang.String)?[0m
+  ?[32mAnd ?[0m?[32muser input password ?[0m?[32m?[1m&quot;WrongPassword&quot;?[0m                                                                      ?[90m# com.example.steps.LoginSteps.userInputPassword(java.lang.String)?[0m
+  ?[32mWhen ?[0m?[32muser click on Login button?[0m                                                                              ?[90m# com.example.steps.LoginSteps.userClickOnLoginButton()?[0m
+  ?[32mThen ?[0m?[32muser will see error message ?[0m?[32m?[1m&quot;Epic sadface: Username and password do not match any user in this service&quot;?[0m ?[90m# com.example.steps.LoginSteps.userWillSeeErrorMessage(java.lang.String)?[0m
+
+@login @boundary-login
+Scenario: Login with empty username                                     ?[90m# src/test/resources/login.feature:21?[0m
+  ?[32mGiven ?[0m?[32muser is on login page?[0m                                           ?[90m# com.example.steps.LoginSteps.userIsOnLoginPage()?[0m
+  ?[32mAnd ?[0m?[32muser input email ?[0m?[32m?[1m&quot;&quot;?[0m                                               ?[90m# com.example.steps.LoginSteps.userInputEmail(java.lang.String)?[0m
+  ?[32mAnd ?[0m?[32muser input password ?[0m?[32m?[1m&quot;secret_sauce&quot;?[0m                                ?[90m# com.example.steps.LoginSteps.userInputPassword(java.lang.String)?[0m
+  ?[32mWhen ?[0m?[32muser click on Login button?[0m                                       ?[90m# com.example.steps.LoginSteps.userClickOnLoginButton()?[0m
+  ?[32mThen ?[0m?[32muser will see error message ?[0m?[32m?[1m&quot;Epic sadface: Username is required&quot;?[0m ?[90m# com.example.steps.LoginSteps.userWillSeeErrorMessage(java.lang.String)?[0m
 </pre>
 </span>
 </div>
@@ -120,13 +133,17 @@ Scenario: Login with invalid credentials   ?[90m# src/test/resources/login.featu
 <pre>SLF4J(W): No SLF4J providers were found.
 SLF4J(W): Defaulting to no-operation (NOP) logger implementation
 SLF4J(W): See https://www.slf4j.org/codes.html#noProviders for further details.
-Sep 17, 2025 2:02:55 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+Sep 18, 2025 2:26:13 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
 WARNING: Unable to find CDP implementation matching 140
-Sep 17, 2025 2:02:55 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$5
+Sep 18, 2025 2:26:13 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$5
 WARNING: Unable to find version of CDP to use for 140.0.7339.133. You may need to include a dependency on a specific version of the CDP using something similar to `org.seleniumhq.selenium:selenium-devtools-v86:4.23.0` where the version (&quot;v86&quot;) matches the version of the chromium-based browser you're using and the version number of the artifact is the same as Selenium's.
-Sep 17, 2025 2:02:59 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+Sep 18, 2025 2:26:15 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
 WARNING: Unable to find CDP implementation matching 140
-Sep 17, 2025 2:02:59 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$5
+Sep 18, 2025 2:26:15 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$5
+WARNING: Unable to find version of CDP to use for 140.0.7339.133. You may need to include a dependency on a specific version of the CDP using something similar to `org.seleniumhq.selenium:selenium-devtools-v86:4.23.0` where the version (&quot;v86&quot;) matches the version of the chromium-based browser you're using and the version number of the artifact is the same as Selenium's.
+Sep 18, 2025 2:26:18 PM org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+WARNING: Unable to find CDP implementation matching 140
+Sep 18, 2025 2:26:18 PM org.openqa.selenium.chromium.ChromiumDriver lambda$new$5
 WARNING: Unable to find version of CDP to use for 140.0.7339.133. You may need to include a dependency on a specific version of the CDP using something similar to `org.seleniumhq.selenium:selenium-devtools-v86:4.23.0` where the version (&quot;v86&quot;) matches the version of the chromium-based browser you're using and the version number of the artifact is the same as Selenium's.
 ?[32m?[1m┌───────────────────────────────────────────────────────────────────────────────────┐?[0m
 ?[32m?[1m│?[0m Share your Cucumber Report with your team at ?[36m?[1m?[4mhttps://reports.cucumber.io?[0m          ?[32m?[1m│?[0m
@@ -155,7 +172,7 @@ WARNING: Unable to find version of CDP to use for 140.0.7339.133. You may need t
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 7.4</a> at Sep 17, 2025, 2:03:01 PM</p>
+<a href="http://www.gradle.org">Gradle 7.4</a> at Sep 18, 2025, 2:26:20 PM</p>
 </div>
 </div>
 </body>
